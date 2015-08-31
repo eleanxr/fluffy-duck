@@ -1,3 +1,2 @@
-kernel.elf
-kernel.img
 *.swp
+build/
