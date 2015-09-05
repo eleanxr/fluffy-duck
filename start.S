@@ -6,7 +6,9 @@
 _start:
     // Load the startup address into the sp (stack pointer)
     // register. On the ARM processor, this is 0x8000
-    ldr sp, =0x8000
+    // ldr sp, =0x8000
+    // Give ourselves 64MB of heap space before we start the stack.
+    ldr sp, =(64 * 1024 * 1024)
     // The rest of the startup function is in C. Run it.
     b _cstartup
 

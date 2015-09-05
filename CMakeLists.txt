@@ -9,6 +9,7 @@ set(SOURCES
     main.c
     start.S
     cstartup.c
+    sbrk.c
 )
 
 set(
