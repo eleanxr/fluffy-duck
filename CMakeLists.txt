@@ -10,10 +10,12 @@ set(SOURCES
     start.S
     cstartup.c
     sbrk.c
+    gpio.c
 )
 
-set(
-    HEADERS definitions.h
+set(HEADERS
+    gpio.h
+    gpio_defs.h
 )
 
 set(CMAKE_EXE_LINKER_FLAGS
@@ -32,3 +34,13 @@ add_custom_command(
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     COMMENT "Convert ELF output to binary image"
 )
+
+set(KERNEL_ROOT_PARTITION "" CACHE PATH "FAT32 parition to deploy kernel to")
+if (KERNEL_ROOT_PARTITION)
+    add_custom_target(
+        deploykernel
+        COMMAND cmake -E copy kernel.img ${KERNEL_ROOT_PARTITION}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Copying kernel.img to ${KERNEL_ROOT_PARTITION}"
+    )
+endif()
