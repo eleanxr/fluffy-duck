@@ -11,11 +11,13 @@ set(SOURCES
     cstartup.c
     sbrk.c
     gpio.c
+    timer.c
 )
 
 set(HEADERS
     gpio.h
     gpio_defs.h
+    timer.h
 )
 
 set(CMAKE_EXE_LINKER_FLAGS
