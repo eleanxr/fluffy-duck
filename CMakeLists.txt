@@ -2,7 +2,7 @@ cmake_minimum_required( VERSION 2.8 )
 
 project(arm-kernel C ASM)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostartfiles")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O1 -nostartfiles")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -O0 -g")
 
 set(SOURCES 
@@ -12,6 +12,7 @@ set(SOURCES
     sbrk.c
     gpio.c
     timer.c
+    interrupt.c
 )
 
 set(HEADERS
