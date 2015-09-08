@@ -29,11 +29,18 @@ _fast_interrupt_vector_h:        .word fast_interrupt_vector
 
 _reset_:
     // Copy the vector table to the active table at 0x0000
-    mov r0, #0x8000
-    mov r1, #0x0000
+    mov r0, #0x8000 // Load startup address into r0
+    mov r1, #0x0000 // Load base vector table address into r1
+    // Load the values from the vector table (at 0x8000 start) into r2-r9
+    // Since we are using a table of constant addresses (the *_h labels, this
+    // copies those addresses into r2-r9
     ldmia r0!,{r2, r3, r4, r5, r6, r7, r8, r9}
+    // Store the vector table constant addresses in r2-r9 into 0x0
     stmia r1!,{r2, r3, r4, r5, r6, r7, r8, r9}
+    // Now, r0 -> _reset_h. Load the handler addresses into r2-r9 from that
+    // table to get the actual vector table addresses..
     ldmia r0!,{r2, r3, r4, r5, r6, r7, r8, r9}
+    // Store the real vector table addresses to 0x0
     stmia r1!,{r2, r3, r4, r5, r6, r7, r8, r9}
     
     // Load the startup address into the sp (stack pointer)
