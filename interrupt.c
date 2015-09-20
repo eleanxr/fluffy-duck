@@ -1,3 +1,4 @@
+#include <arm_timer.h>
 
 #define INTERRUPT_HANDLER(type) void __attribute__((interrupt(type)))
 
@@ -32,6 +33,18 @@ INTERRUPT_HANDLER("ABORT") data_abort_vector()
 
 INTERRUPT_HANDLER("IRQ") interrupt_vector()
 {
+    static int is_lit = 0;
+
+    /* Clear the timer interrupt. */
+    RPI_GetArmTimer()->IRQClear = 1;
+
+    if (is_lit) {
+        led_on();
+        is_lit = 0;
+    } else {
+        led_on();
+        is_lit = 1;
+    }
 }
 
 INTERRUPT_HANDLER("FIQ") fast_interrupt_vector()
@@ -42,4 +55,3 @@ INTERRUPT_HANDLER("FIQ") fast_interrupt_vector()
         /* nothing */
     }
 }
-

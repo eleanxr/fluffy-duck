@@ -5,7 +5,9 @@ project(arm-kernel C ASM)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O1 -nostartfiles")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -O0 -g")
 
-set(SOURCES 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+set(SOURCES
     main.c
     start.S
     cstartup.c
@@ -13,12 +15,16 @@ set(SOURCES
     gpio.c
     timer.c
     interrupt.c
+    rpi_interrupt.c
+    arm_timer.c
 )
 
 set(HEADERS
     gpio.h
     gpio_defs.h
     timer.h
+    rpi_interrupt.h
+    arm_timer.h
 )
 
 set(CMAKE_EXE_LINKER_FLAGS
@@ -29,7 +35,7 @@ add_executable(
     arm-kernel
     ${SOURCES}
     ${HEADERS}
-)    
+)
 
 add_custom_command(
     TARGET arm-kernel

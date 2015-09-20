@@ -3,6 +3,7 @@
 .global _start
 .global _get_stack_pointer
 .global _exception_table
+.global _enable_interrupts
 
 _start:
     // Set up the exception vector table (ARM AR architecture 1.8.1 table B1-3
@@ -42,7 +43,7 @@ _reset_:
     ldmia r0!,{r2, r3, r4, r5, r6, r7, r8, r9}
     // Store the real vector table addresses to 0x0
     stmia r1!,{r2, r3, r4, r5, r6, r7, r8, r9}
-    
+
     // Load the startup address into the sp (stack pointer)
     // register. On the ARM processor, this is 0x8000
     // ldr sp, =0x8000
@@ -61,3 +62,11 @@ _get_stack_pointer:
     // Return
     mov pc, lr
 
+// Code to enable interrupts.
+// See Section A1.1.3 of the ARM reference manual
+// and A2.5 of the same for CPSR register information.
+_enable_interrupts:
+    mrs r0, cpsr
+    bic r0, r0, #0x80
+    msr cpsr_c, r0
+    mov pc, lr
