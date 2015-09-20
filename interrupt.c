@@ -39,7 +39,7 @@ INTERRUPT_HANDLER("IRQ") interrupt_vector()
     RPI_GetArmTimer()->IRQClear = 1;
 
     if (is_lit) {
-        led_on();
+        led_off();
         is_lit = 0;
     } else {
         led_on();
