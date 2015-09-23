@@ -7,6 +7,10 @@
 #include "gpio.h"
 #include "timer.h"
 
+extern "C" {
+
+extern void _enable_interrupts();
+
 int kernel_main(void) __attribute__((naked));
 int kernel_main(void) {
 
@@ -34,3 +38,5 @@ int kernel_main(void) {
         /* spin */
     }
 }
+
+} // extern "C"

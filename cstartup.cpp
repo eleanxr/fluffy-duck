@@ -3,8 +3,9 @@
 extern int __bss_start__;
 extern int __bss_end__;
 
-extern void kernel_main(unsigned int r0, unsigned int r1, unsigned int atags);
+extern "C" {
 
+extern void kernel_main(unsigned int r0, unsigned int r1, unsigned int atags);
 
 void _cstartup(unsigned int r0, unsigned int r1, unsigned int r2)
 {
@@ -23,3 +24,10 @@ void _cstartup(unsigned int r0, unsigned int r1, unsigned int r2)
         ;
 }
 
+void _exit() {
+    while (1) {
+        // Do nothing.
+    }
+}
+
+} // extern "C"

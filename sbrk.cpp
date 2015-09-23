@@ -1,4 +1,7 @@
 #include <sys/stat.h>
+#include <sys/types.h>
+
+extern "C" {
 
 /* Implemented in start.S - gives us the stack pointer*/
 extern caddr_t _get_stack_pointer(void);
@@ -19,3 +22,5 @@ caddr_t _sbrk(int incr)
     heap_end += incr;
     return (caddr_t)prev_heap_end;
 }
+
+} // extern "C"
