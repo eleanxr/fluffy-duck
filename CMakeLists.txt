@@ -1,25 +1,22 @@
 cmake_minimum_required( VERSION 2.8 )
 
-project(arm-kernel C CXX ASM)
+project(arm-kernel C ASM)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O1 -nostartfiles")
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -O0 -g")
-set(CMAKE_CXX_FLAGS "-std=c++11 -O1 -nostartfiles")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(SOURCES
-    main.cpp
+    main.c
     start.S
-    cstartup.cpp
-    sbrk.cpp
-    gpio.cpp
-    timer.cpp
-    interrupt.cpp
-    rpi_interrupt.cpp
-    arm_timer.cpp
-    kill.cpp
-    getpid.cpp
+    cstartup.c
+    sbrk.c
+    gpio.c
+    timer.c
+    interrupt.c
+    rpi_interrupt.c
+    arm_timer.c
 )
 
 set(HEADERS
@@ -28,7 +25,6 @@ set(HEADERS
     timer.h
     rpi_interrupt.h
     arm_timer.h
-    syscall.h
 )
 
 set(CMAKE_EXE_LINKER_FLAGS
