@@ -1,5 +1,7 @@
 #include <arm_timer.h>
 
+#include <gpio.h>
+
 #define INTERRUPT_HANDLER(type) void __attribute__((interrupt(type)))
 
 INTERRUPT_HANDLER("ABORT") reset_vector()

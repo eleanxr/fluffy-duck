@@ -7,6 +7,9 @@
 #include "gpio.h"
 #include "timer.h"
 
+/* Defined in start.S. */
+extern void _enable_interrupts();
+
 int kernel_main(void) __attribute__((naked));
 int kernel_main(void) {
 
